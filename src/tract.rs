@@ -11,14 +11,14 @@ fn move_towards(current: f64, target: f64, amt_up: f64, amt_down: f64) -> f64 {
 
 pub struct Tract {
     pub sr: f64,
-    n: usize,
-    blade_start: usize,
-    lip_start: usize,
-    epiglottis_start: usize,
+    pub n: usize,
+    pub blade_start: usize,
+    pub lip_start: usize,
+    pub epiglottis_start: usize,
 
-    diameter: Vec<f64>,
+    pub diameter: Vec<f64>,
     rest_diameter: Vec<f64>,
-    target_diameter: Vec<f64>,
+    pub target_diameter: Vec<f64>,
     new_diameter: Vec<f64>,
     r: Vec<f64>,
     l: Vec<f64>,
@@ -28,15 +28,15 @@ pub struct Tract {
     junction_outr: Vec<f64>,
     a: Vec<f64>,
 
-    nose_length: usize,
-    nose_start: usize,
-    tip_start: usize,
+    pub nose_length: usize,
+    pub nose_start: usize,
+    pub tip_start: usize,
     nosel: Vec<f64>,
     noser: Vec<f64>,
     nose_junc_outl: Vec<f64>,
     nose_junc_outr: Vec<f64>,
     nose_reflection: Vec<f64>,
-    nose_diameter: Vec<f64>,
+    pub nose_diameter: Vec<f64>,
     nose_a: Vec<f64>,
 
     reflection_left: f64,
@@ -47,15 +47,15 @@ pub struct Tract {
     new_reflection_right: f64,
     new_reflection_nose: f64,
 
-    velum_target: f64,
+    pub velum_target: f64,
 
     glottal_reflection: f64,
     lip_reflection: f64,
     last_obstruction: i32,
     pub fade: f64,
     movement_speed: f64,
-    lip_output: f64,
-    nose_output: f64,
+    pub lip_output: f64,
+    pub nose_output: f64,
     block_time: f64,
 
     tpool: TransientPool,
@@ -160,7 +160,7 @@ impl Tract {
         }
     }
 
-    fn calculate_reflections(&mut self) {
+    pub fn calculate_reflections(&mut self) {
         for i in 0..self.n {
             self.a[i] = self.diameter[i].powi(2);
         }

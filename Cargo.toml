@@ -3,5 +3,15 @@ name = "pinktrombone"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+name = "pinktrombone"
+path = "src/lib.rs"
+
+[[bin]]
+name = "pinktrombone"
+path = "src/main.rs"
+
+
 [dependencies]
+hound = "3.5.1"
 rand = "0.8.5"

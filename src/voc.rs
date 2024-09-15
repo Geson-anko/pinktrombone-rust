@@ -1,4 +1,5 @@
 use std::f64::consts::PI;
+use std::ops::Range;
 
 use crate::glottis::Glottis;
 use crate::tract::Tract;
@@ -10,7 +11,7 @@ pub struct Voc {
     pub sr: f64,
     chunk: usize,
     vocal_output_scaler: f64,
-    counter: usize,
+    pub counter: usize,
 }
 
 impl Voc {
@@ -177,7 +178,46 @@ impl Voc {
         self.tract.set_lips(lips);
     }
 
+    pub fn set_tract_diameters(&mut self, range: Range<usize>, diameters: Vec<f64>) {
+        for (i, &diameter) in range.zip(diameters.iter()) {
+            if i < self.tract.target_diameter.len() {
+                self.tract.target_diameter[i] = diameter;
+            }
+        }
+    }
+
     pub fn play_chunk(&mut self) -> &[f64] {
         self.step()
+    }
+}
+
+pub enum Mode {
+    None,
+    Tongue,
+}
+
+pub struct VocDemoD {
+    pub sr: f64,
+    pub chunk: usize,
+    pub voc: Voc,
+    pub gain: f64,
+    pub mode: Mode,
+    pub tongue_pos: f64,
+    pub tongue_diam: f64,
+}
+
+impl VocDemoD {
+    pub fn new(sr: f64, chunk: usize) -> Self {
+        let voc = Voc::new(sr, chunk, 0.125, 400.0, 0.6, 44, 28, 17, 32, 12, 6, 39);
+
+        VocDemoD {
+            sr,
+            chunk,
+            voc,
+            gain: 1.0,
+            mode: Mode::None,
+            tongue_pos: 0.0,
+            tongue_diam: 0.0,
+        }
     }
 }

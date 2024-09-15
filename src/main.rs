@@ -124,11 +124,11 @@ fn throat_and_lips() -> Result<(), Box<dyn Error>> {
     let mut x: f64 = 0.0;
     let mut y: f64 = 0.0;
 
-    let mut throat = (x.sin() * 1.5 / 2.0 + 0.75);
+    let mut throat = x.sin() * 1.5 / 2.0 + 0.75;
     let n_t = 7;
     vdd.voc.set_tract_diameters(0..n_t, vec![throat; n_t]);
 
-    let mut lips = (y.sin() * 1.5 / 2.0 + 0.75);
+    let mut lips = y.sin() * 1.5 / 2.0 + 0.75;
     let n_l = vdd.voc.tract_size() - 39;
     vdd.voc
         .set_tract_diameters(39..vdd.voc.tract_size(), vec![lips; n_l]);
@@ -152,12 +152,12 @@ fn throat_and_lips() -> Result<(), Box<dyn Error>> {
         }
 
         x += 0.55;
-        lips = (x.sin() * 1.5 / 2.0 + 0.75);
+        lips = x.sin() * 1.5 / 2.0 + 0.75;
         vdd.voc
             .set_tract_diameters(39..vdd.voc.tract_size(), vec![lips; n_l]);
 
         y += 0.5;
-        throat = (y.sin() * 1.5 / 2.0 + 0.75);
+        throat = y.sin() * 1.5 / 2.0 + 0.75;
         vdd.voc.set_tract_diameters(0..n_t, vec![throat; n_t]);
 
         println!("Duration: {}, Throat: {}", writer.duration(), throat);
